@@ -8,18 +8,22 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
+    // Mantenemos el trait si lo usas, pero no es necesario aquí
+    // use WithoutModelEvents; 
 
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
+        // 🚨 COMENTAMOS O ELIMINAMOS EL USUARIO DE PRUEBA POR DEFECTO:
         // User::factory(10)->create();
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // 🟢 NUEVA LÍNEA: LLAMAMOS A TU SEEDER DE ADMINISTRADOR
+        $this->call(AdminSeeder::class);
     }
 }
